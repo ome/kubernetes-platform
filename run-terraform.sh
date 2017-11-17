@@ -1,21 +1,26 @@
-#!/bin/sh
+#!/bin/bash
 set -eu
 
-CMD="$1"
+if [ $# -ne 2 ]; then
+    echo USAGE $(basename $0) environment command
+    exit 1
+fi
+if [ "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" != "$PWD" ]; then
+    echo Must be run from script parent directory
+    exit 2
+fi
+
+ENVIRONMENT="$1"
+CMD="$2"
+
 export TF_VAR_username=OS_USERNAME
 export TF_VAR_password=OS_PASSWORD
 export TF_VAR_tenant=OS_TENANT_ID
 export TF_VAR_auth_url=OS_AUTH_URL
 
-# Must be run from this directory
-SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-cd "$SCRIPT_DIR"
-
-TERRAFORM_STATE="./terraform.tfstate"
-TERRAFORM_VARFILE=kubetest.tfvars
-
-#TERRAFORM_DIR=kubespray/contrib/terraform/openstack
-TERRAFORM_DIR=.
+TERRAFORM_STATE="$ENVIRONMENT/terraform.tfstate"
+TERRAFORM_VARFILE="$ENVIRONMENT/kubetest.tfvars"
+TERRAFORM_DIR="$ENVIRONMENT"
 
 terraform=/usr/local/bin/terraform
 $terraform version

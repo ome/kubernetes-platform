@@ -1,6 +1,20 @@
-#!/bin/sh
+#!/bin/bash
+set -eu
+
+if [ $# -lt 1 ]; then
+    echo USAGE $(basename $0) environment [...]
+    exit 1
+fi
+if [ "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" != "$PWD" ]; then
+    echo Must be run from script parent directory
+    exit 2
+fi
+
+ENVIRONMENT="$1"
+shift
+
 export ANSIBLE_HOST_KEY_CHECKING=False
-export TERRAFORM_STATE_ROOT="$PWD"
+export TERRAFORM_STATE_ROOT="$ENVIRONMENT"
 EXTRA_VARS='{"helm_enabled":true, "kube_network_plugin":"flannel"}'
 
 if [ $# -gt 0 ]; then
