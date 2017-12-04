@@ -14,18 +14,6 @@ all:
     # https://github.com/kubernetes-incubator/kubespray/blob/v2.3.0/docs/openstack.md
     cloud_provider: openstack
 
-# kube-master:
-#   children:
-#     kube-kubemaster-hosts:
-#
-# kube-node:
-#   children:
-#     kube-kubeworker-hosts:
-#
-# etcd:
-#   children:
-#     kube-kubemaster-hosts:
-
 k8s-cluster:
   children:
     kube-node:
@@ -42,13 +30,6 @@ k8s-cluster:
     # These are the external IPs of the master nodes
     supplementary_addresses_in_ssl_keys: "{{ external_access }}"
 
-    # Docker
-    # Copied from inventory/group_vars/k8s-cluster.yml + mtu
-    docker_options: "--insecure-registry={{ kube_service_addresses }} --graph={{ docker_daemon_graph }} {{ docker_log_opts }} --mtu {{ ansible_default_ipv4.mtu }}"
-
     # Flannel (Calico needs additional changes on openstack)
     # Doesn't work, it needs to be passed on the command line
     #kube_network_plugin: flannel
-
-    # This is a local addition
-    docker_enable_iptables: true
