@@ -2,9 +2,14 @@
 
 > WARNING: This repository is in development and is not ready for a production deployment of Kubernetes
 
-This repository contains Ansible files for deploying a multi-master high-availability Kubernetes cluster, and Terraform configuration for provisioning virtual machines on openstack.
+This repository contains Ansible files for deploying a multi-master
+high-availability Kubernetes cluster, and Terraform configuration for
+provisioning virtual machines on openstack.
 
-The majority of the work is handled by the [KubeSpray project](https://github.com/kubernetes-incubator/kubespray/).
+The majority of the work is handled by the [KubeSpray
+project](https://github.com/kubernetes-incubator/kubespray/).
+A [fork](https://github.com/openmicroscopy/kubespray) exists
+in the openmicroscopy organization.
 
 
 ## Example usage
