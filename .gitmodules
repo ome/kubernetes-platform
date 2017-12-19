@@ -1,3 +1,6 @@
 [submodule "kubespray"]
 	path = kubetest/kubespray
 	url = https://github.com/kubernetes-incubator/kubespray.git
+[submodule "kube2/kubespray"]
+	path = kube2/kubespray
+	url = https://github.com/kubernetes-incubator/kubespray.git
