@@ -1,6 +1,6 @@
 
 module "network" {
-  source = "../kubespray/contrib/terraform/openstack/modules/network"
+  source = "kubespray/contrib/terraform/openstack/modules/network"
 
   external_net = "${var.external_net}"
   network_name = "${var.network_name}"
@@ -10,7 +10,7 @@ module "network" {
 
 
 module "compute" {
-  source = "../kubespray/contrib/terraform/openstack/modules/compute"
+  source = "kubespray/contrib/terraform/openstack/modules/compute"
 
   cluster_name = "${var.cluster_name}"
   number_of_k8s_masters = "${var.number_of_k8s_masters}"

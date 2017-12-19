@@ -1,1 +1,1 @@
-../../../kubespray/inventory/group_vars/k8s-cluster.yml
+../../kubespray/inventory/group_vars/k8s-cluster.yml
