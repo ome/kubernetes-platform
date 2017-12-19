@@ -11,11 +11,12 @@ if [ "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" != "$PWD" ]; then
 fi
 
 ENVIRONMENT="$1"
+cd "$ENVIRONMENT"
 shift
 
 export ANSIBLE_HOST_KEY_CHECKING=False
-export TERRAFORM_STATE_ROOT="$ENVIRONMENT"
-ANSIBLE_ARGS="-i $ENVIRONMENT/inventory --become"
+export TERRAFORM_STATE_ROOT="."
+ANSIBLE_ARGS="-i ./inventory --become"
 EXTRA_VARS='{"helm_enabled":true, "kube_network_plugin":"flannel"}'
 
 if [ $# -gt 0 ]; then
