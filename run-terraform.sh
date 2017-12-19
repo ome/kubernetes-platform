@@ -11,11 +11,12 @@ if [ "$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )" != "$PWD" ]; then
 fi
 
 ENVIRONMENT="$1"
+cd "$ENVIRONMENT"
 CMD="$2"
 
-TERRAFORM_STATE="$ENVIRONMENT/terraform.tfstate"
-TERRAFORM_VARFILE="$ENVIRONMENT/$ENVIRONMENT.tfvars"
-TERRAFORM_DIR="$ENVIRONMENT"
+TERRAFORM_STATE="terraform.tfstate"
+TERRAFORM_VARFILE="$ENVIRONMENT.tfvars"
+TERRAFORM_DIR="."
 
 terraform version
 
