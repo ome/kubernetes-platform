@@ -1,0 +1,47 @@
+# https://github.com/kubernetes-incubator/kubespray/blob/master/docs/ansible.md
+
+all:
+#  hosts:
+#    bastion:
+#      ansible_host: "{{ external_access.0 }}"
+  vars:
+    ansible_user: spli
+    # kubespray bastion
+#    ansible_ssh_common_args: "-F kubespray/ssh-bastion.conf"
+    external_access:
+    - 10.0.17.150
+
+k8s-cluster:
+  children:
+    kube-node:
+    kube-master:
+  vars:
+    # https://github.com/kubernetes-incubator/kubespray/blob/master/docs/vars.md
+    # https://github.com/kubernetes-incubator/kubespray/blob/master/roles/kubespray-defaults/defaults/main.yaml
+
+    # Doesn't work, it needs to be passed on the command line
+    #helm_enabled: true
+
+    # Experimental (creates a local kubeconfig file):
+    kubeconfig_localhost: true
+    # These are the external IPs of the master nodes
+    supplementary_addresses_in_ssl_keys: "{{ external_access }}"
+
+    # Flannel (Calico needs additional changes on openstack)
+    # Doesn't work, it needs to be passed on the command line
+    #kube_network_plugin: flannel
+
+kube-node:
+  hosts:
+    master-01:
+      ansible_host: 10.0.17.150
+
+kube-master:
+  hosts:
+    master-01:
+      ansible_host: 10.0.17.150
+
+etcd:
+  hosts:
+    master-01:
+      ansible_host: 10.0.17.150
