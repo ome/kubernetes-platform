@@ -1,6 +1,9 @@
 # https://github.com/kubernetes-incubator/kubespray/blob/master/docs/ansible.md
 
 all:
+  hosts:
+    master-01:
+      ansible_host: 10.0.17.150
 #  hosts:
 #    bastion:
 #      ansible_host: "{{ external_access.0 }}"
@@ -34,14 +37,11 @@ k8s-cluster:
 kube-node:
   hosts:
     master-01:
-      ansible_host: 10.0.17.150
 
 kube-master:
   hosts:
     master-01:
-      ansible_host: 10.0.17.150
 
 etcd:
   hosts:
     master-01:
-      ansible_host: 10.0.17.150
