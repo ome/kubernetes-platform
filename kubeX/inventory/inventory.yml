@@ -3,16 +3,16 @@
 all:
   hosts:
     master-01:
-      ansible_host: 10.0.17.150
+      ansible_host: k8s-temporary-test.openmicroscopy.org
+      #ansible_host: 10.0.17.150
 #  hosts:
 #    bastion:
 #      ansible_host: "{{ external_access.0 }}"
   vars:
-    ansible_user: spli
     # kubespray bastion
 #    ansible_ssh_common_args: "-F kubespray/ssh-bastion.conf"
     external_access:
-    - 10.0.17.150
+    - k8s-temporary-test.openmicroscopy.org
 
 k8s-cluster:
   children:
