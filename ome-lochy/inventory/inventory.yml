@@ -1,18 +1,9 @@
 # https://github.com/kubernetes-incubator/kubespray/blob/master/docs/ansible.md
 
 all:
-  hosts:
-    master-01:
-      ansible_host: k8s-temporary-test.openmicroscopy.org
-      #ansible_host: 10.0.17.150
-#  hosts:
-#    bastion:
-#      ansible_host: "{{ external_access.0 }}"
   vars:
-    # kubespray bastion
-#    ansible_ssh_common_args: "-F kubespray/ssh-bastion.conf"
     external_access:
-    - k8s-temporary-test.openmicroscopy.org
+    - ome-lochy.openmicroscopy.org
 
 k8s-cluster:
   children:
@@ -27,7 +18,7 @@ k8s-cluster:
 
     # Experimental (creates a local kubeconfig file):
     kubeconfig_localhost: true
-    # These are the external IPs of the master nodes
+    # These are the external addresses/aliases of the master nodes
     supplementary_addresses_in_ssl_keys: "{{ external_access }}"
 
     # Flannel (Calico needs additional changes on openstack)
@@ -36,12 +27,13 @@ k8s-cluster:
 
 kube-node:
   hosts:
-    master-01:
+    ome-lochy-n01.openmicroscopy.org:
+    ome-lochy-n02.openmicroscopy.org:
 
 kube-master:
   hosts:
-    master-01:
+    ome-lochy-m01.openmicroscopy.org:
 
 etcd:
   hosts:
-    master-01:
+    ome-lochy-m01.openmicroscopy.org:
