@@ -16,7 +16,7 @@ shift
 
 export ANSIBLE_HOST_KEY_CHECKING=False
 export TERRAFORM_STATE_ROOT="."
-ANSIBLE_ARGS="-i ./inventory --become"
+ANSIBLE_ARGS="-i ./inventory --become --ask-become-pass"
 EXTRA_VARS='{"helm_enabled":true, "kube_network_plugin":"flannel"}'
 
 if [ $# -gt 0 ]; then

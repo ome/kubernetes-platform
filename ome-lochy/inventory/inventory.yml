@@ -1,6 +1,13 @@
 # https://github.com/kubernetes-incubator/kubespray/blob/master/docs/ansible.md
 
 all:
+  hosts:
+    ome-lochy-m01: 
+      ansible_host: 134.36.66.39
+    ome-lochy-n01: 
+      ansible_host: 134.36.66.40
+    ome-lochy-n02: 
+      ansible_host: 134.36.66.41
   vars:
     external_access:
     - ome-lochy.openmicroscopy.org
@@ -27,13 +34,13 @@ k8s-cluster:
 
 kube-node:
   hosts:
-    ome-lochy-n01.openmicroscopy.org:
-    ome-lochy-n02.openmicroscopy.org:
+    ome-lochy-n01:
+    ome-lochy-n02:
 
 kube-master:
   hosts:
-    ome-lochy-m01.openmicroscopy.org:
+    ome-lochy-m01:
 
 etcd:
   hosts:
-    ome-lochy-m01.openmicroscopy.org:
+    ome-lochy-m01:
