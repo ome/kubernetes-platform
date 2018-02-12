@@ -2,15 +2,15 @@
 
 all:
   hosts:
-    ome-lochy-m01: 
+    ome-lochy-m01:
       ansible_host: 134.36.66.39
-    ome-lochy-n01: 
+    ome-lochy-n01:
       ansible_host: 134.36.66.40
-    ome-lochy-n02: 
+    ome-lochy-n02:
       ansible_host: 134.36.66.41
-  vars:
-    external_access:
-    - ome-lochy.openmicroscopy.org
+#  vars:
+#    external_access:
+#    - ome-lochy.openmicroscopy.org
 
 k8s-cluster:
   children:
@@ -26,7 +26,7 @@ k8s-cluster:
     # Experimental (creates a local kubeconfig file):
     kubeconfig_localhost: true
     # These are the external addresses/aliases of the master nodes
-    supplementary_addresses_in_ssl_keys: "{{ external_access }}"
+    # supplementary_addresses_in_ssl_keys: "{{ external_access }}"
 
     # Flannel (Calico needs additional changes on openstack)
     # Doesn't work, it needs to be passed on the command line
