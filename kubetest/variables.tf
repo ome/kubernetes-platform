@@ -1,1 +1,0 @@
-../kubespray/contrib/terraform/openstack/variables.tf

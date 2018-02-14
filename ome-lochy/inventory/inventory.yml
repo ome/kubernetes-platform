@@ -2,17 +2,15 @@
 
 all:
   hosts:
-    bastion:
-      ansible_host: "{{ external_access.0 }}"
-  vars:
-    ansible_user: centos
-    # kubespray bastion
-    ansible_ssh_common_args: "-F kubespray/ssh-bastion.conf"
-    external_access:
-    - 193.62.55.95
-    - ebi-embassy-kubetest.openmicroscopy.org
-    # https://github.com/kubernetes-incubator/kubespray/blob/v2.3.0/docs/openstack.md
-    cloud_provider: openstack
+    ome-lochy-m01:
+      ansible_host: 134.36.66.39
+    ome-lochy-n01:
+      ansible_host: 134.36.66.40
+    ome-lochy-n02:
+      ansible_host: 134.36.66.41
+#  vars:
+#    external_access:
+#    - ome-lochy.openmicroscopy.org
 
 k8s-cluster:
   children:
@@ -27,9 +25,22 @@ k8s-cluster:
 
     # Experimental (creates a local kubeconfig file):
     kubeconfig_localhost: true
-    # These are the external IPs of the master nodes
-    supplementary_addresses_in_ssl_keys: "{{ external_access }}"
+    # These are the external addresses/aliases of the master nodes
+    # supplementary_addresses_in_ssl_keys: "{{ external_access }}"
 
     # Flannel (Calico needs additional changes on openstack)
     # Doesn't work, it needs to be passed on the command line
     #kube_network_plugin: flannel
+
+kube-node:
+  hosts:
+    ome-lochy-n01:
+    ome-lochy-n02:
+
+kube-master:
+  hosts:
+    ome-lochy-m01:
+
+etcd:
+  hosts:
+    ome-lochy-m01:
