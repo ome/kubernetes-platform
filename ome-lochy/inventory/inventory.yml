@@ -32,6 +32,12 @@ k8s-cluster:
     # Doesn't work, it needs to be passed on the command line
     #kube_network_plugin: flannel
 
+    # Github authn
+    # https://github.com/oursky/kubernetes-github-authn
+    # https://raw.githubusercontent.com/oursky/kubernetes-github-authn/master/manifests/token-webhook-config.json
+    apiserver_custom_flags:
+    - "--authentication-token-webhook-config-file=/etc/kubernetes/webhooks/token-webhook-config.json"
+
 kube-node:
   hosts:
     ome-lochy-n01:

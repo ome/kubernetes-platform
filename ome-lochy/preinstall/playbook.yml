@@ -1,0 +1,15 @@
+- hosts: kube-master
+  become: yes
+
+  tasks:
+
+  - name: Create kubernetes additional config directory
+    file:
+      path: /etc/kubernetes/webhooks
+      recurse: yes
+      state: directory
+
+  - name: Copy github-authn config file
+    copy:
+      dest: /etc/kubernetes/webhooks/token-webhook-config.json
+      src: token-webhook-config.json

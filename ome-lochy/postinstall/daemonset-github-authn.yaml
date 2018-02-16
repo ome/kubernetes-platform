@@ -1,0 +1,34 @@
+# Based on https://github.com/oursky/kubernetes-github-authn/blob/b8f77f576c682689411bab82d3894969941710e4/manifests/github-authn.yaml
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  labels:
+    k8s-app: github-authn
+  name: github-authn
+  namespace: kube-system
+spec:
+  selector:
+    matchLabels:
+      k8s-app: github-authn
+  template:
+    metadata:
+      labels:
+        k8s-app: github-authn
+      annotations:
+        scheduler.alpha.kubernetes.io/critical-pod: ''
+    spec:
+      containers:
+      # TODO: Only latest is available, we should tag it ourselves
+      - image: oursky/kubernetes-github-authn
+        name: kubernetes-github-authn
+        ports:
+        - containerPort: 3000
+          hostPort: 23000
+          protocol: TCP
+      #hostNetwork: true
+      tolerations:
+      - key: node-role.kubernetes.io/master
+        effect: NoSchedule
+      nodeSelector:
+        node-role.kubernetes.io/master: "true"
+      restartPolicy: Always
