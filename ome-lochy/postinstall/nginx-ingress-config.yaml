@@ -1,0 +1,24 @@
+## nginx ingress configuration
+# helm install stable/nginx-ingress --version=0.9.3 --name=nginx-ingress --namespace=kube-system -f nginx-ingress-config.yaml
+
+controller:
+#  hostNetwork: true
+  daemonset:
+    useHostPorts: true
+  kind: DaemonSet
+  tolerations:
+    - key: node-role.kubernetes.io/master
+      operator: Exists
+      effect: NoSchedule
+# Masters only, or masters + nodes?
+#  nodeSelector:
+#    node-role.kubernetes.io/master: "true"
+  stats:
+    enabled: false
+
+rbac:
+  create: true
+
+# Optionally specify SSL certificate
+#extraArgs:
+#  default-ssl-certificate: "<namespace>/<secret_name>"
