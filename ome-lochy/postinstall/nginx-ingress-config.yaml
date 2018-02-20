@@ -15,10 +15,10 @@ controller:
 #    node-role.kubernetes.io/master: "true"
   stats:
     enabled: false
+# Optionally specify SSL certificate
+# https://github.com/kubernetes/charts/issues/1495#issuecomment-342275665
+  extraArgs:
+    default-ssl-certificate: kube-system/star-openmicroscopy-org
 
 rbac:
   create: true
-
-# Optionally specify SSL certificate
-#extraArgs:
-#  default-ssl-certificate: "<namespace>/<secret_name>"
